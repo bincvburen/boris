@@ -28,6 +28,7 @@ header {
     position: relative;
 }
 
+
 header > div {
 	background-color: var(--background);
     border-radius: 15px;
