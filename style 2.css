@@ -1,0 +1,544 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+/**************/
+/* CSS REMEDY */
+/**************/
+*,
+*::after,
+*::before {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	scroll-behavior: smooth;
+}
+
+.smooth-scroll-undo * {
+	scroll-behavior: unset;
+}
+
+/* //////////////////////////
+	HELE DOCUMENT
+////////////////////////// */
+
+main {
+	background-color: var(--achtergrond-licht);
+	padding-top: 3.5em;
+}
+
+section {
+	padding: 1em;
+	max-width: var(--maxwidth);
+	margin: auto;
+	transition: height 0.3s ease;
+}
+
+section>div {
+	margin: unset;
+}
+
+section>h2 {
+	margin-bottom: 0.25em;
+}
+
+body {
+	transition: padding 1s;
+	background-color: var(--achtergrond-licht);
+}
+
+img {
+	scale: 100%;
+	/* align-self: center; */
+	display: block;
+	height: auto;
+}
+
+
+
+
+/* //////////////////////////
+	VARIABELEN 
+////////////////////////// */
+
+:root {
+	--tekst-licht: white;
+	--tekst-donker: black;
+
+	--achtergrond-licht: #F6F0FF;
+	--achtergrond-donker: #1f181e;
+
+	--container-licht: white;
+	--container-donker: black;
+
+	--box-licht: white;
+	--box-donker: black;
+
+	--accent1: #EB067A;
+	--accent2: #6923F5;
+
+	--omslagpunt: 800px;
+	--maxwidth: 1250px;
+
+	--container: 100px;
+	--gap: 1em;
+
+	--font-titel: 18px;
+	--font-ondertitel: 16px;
+
+}
+
+
+
+
+/* //////////////////////////
+	KOPTEKSTEN 
+////////////////////////// */
+
+
+p {
+	font-family: 'Outfit';
+	font-size: var(--font-ondertitel);
+}
+
+h1 {
+	font-family: 'Outfit';
+	font-size: 40px;
+	color: var(--tekst-donker);
+}
+
+h2 {
+	font-family: 'Outfit';
+	font-size: 40px;
+	transition: font 0.5 ease-in-out;
+}
+
+h3 {
+	font-family: 'Outfit';
+	font-size: var(--font-titel);
+}
+
+h4 {
+	font-family: 'Outfit';
+	font-size: 22px;
+}
+
+li {
+	font-family: 'Outfit';
+	font-size: 12px;
+}
+
+a {
+	color: black
+}
+
+a:visited {
+	color: black;
+}
+
+
+
+/* //////////////////////////
+	HEADER EN NAVIGATIE 
+////////////////////////// */
+
+/* HEADER */
+
+header {
+	background-color: var(--container-licht);
+	position: fixed;
+	z-index: 1000;
+	width: 100vw;
+}
+
+header>div:first-of-type {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0.75em 1em;
+	max-width: var(--maxwidth);
+	margin: auto;
+}
+
+
+/* HAMBURGER MENU */
+
+.container_menu {
+	cursor: pointer;
+}
+
+.hamburger-menu {
+	position: fixed;
+	top: 12.5px;
+	right: 12.5px;
+	z-index: 1001;
+	padding: 0.5em;
+}
+
+.bar {
+	width: 30px;
+	height: 3px;
+	background-color: #333;
+	margin: 6px 0;
+	transition: transform 0.4s ease-in-out;
+}
+
+.menu {
+	position: fixed;
+	top: 0;
+	right: -75%;
+	/* Initially hidden */
+	height: 100%;
+	background-color: var(--container-licht);
+	width: 75%;
+	transition: right 0.25s ease-in-out, box-shadow 0.25s ease-in-out;
+	z-index: 900;
+}
+
+.menu.show-menu {
+	right: 0;
+	-webkit-box-shadow: 0px 0px 0px 9999px rgba(0, 0, 0, 0.5);
+	box-shadow: 0px 0px 0px 9999px rgba(0, 0, 0, 0.6);
+}
+
+.menu ul {
+	list-style-type: none;
+	padding: 1em;
+	margin-top: 3em;
+}
+
+.menu li {
+	padding: 10px;
+	border-bottom: 1px solid #ccc;
+}
+
+.menu li:last-child {
+	border-bottom: none;
+}
+
+.menu li a {
+	color: var(--accent1);
+	text-decoration: none;
+	font-size: 30px;
+}
+
+/* NORMAAL MENU */
+
+
+.normaal_menu ul {
+	list-style-type: none;
+	display: flex;
+}
+
+.normaal_menu li {
+	margin-left: 2em;
+}
+
+.normaal_menu li:last-child {
+	border-bottom: none;
+}
+
+.normaal_menu li a {
+	color: var(--accent1);
+	text-decoration: none;
+	font-size: 20px;
+}
+
+
+/* KNOPPEN */
+
+.ga-terug {
+	margin-top: 1em;
+	/* background-color: red; */
+	max-width: var(--maxwidth);
+	margin: auto;
+	padding: 1em;
+	display: flex;
+	justify-content: space-between;
+}
+
+.button-secundair {
+	border: var(--tekst-donker) solid 2px;
+	border-radius: 10px;
+	padding: 0.5em;
+	background-color: transparent;
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+	gap: 0.75em;
+	font-size: 16px;
+	transition: scale 0.25s ease-in-out;
+	cursor: pointer;
+	color: var(--tekst-donker);
+}
+
+.button-secundair:hover {
+	border-color: var(--accent1);
+	scale: 1.025;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:visited {
+	text-decoration: none;
+	color: var(--tekst-donker);
+}
+
+
+
+/* //////////////////////////
+	Inloggen
+////////////////////////// */
+
+#titleInloggen {
+	text-align: center;
+	margin-bottom: 15px;
+}
+
+#textInloggen {
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+#textWwVergeten {
+	text-align: right;
+	text-decoration: underline;
+	margin-bottom: 15px;
+	font-size: 15px;
+}
+
+.secInloggen {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+#loginForm {
+	width: 300px;
+	text-align: left;
+}
+
+.form-group {
+	display: flex;
+	flex-direction: column;
+	/* Verander naar kolomrichting */
+	margin-bottom: 15px;
+	width: 100%;
+}
+
+label {
+	font-family: 'Outfit';
+	font-size: 20px;
+	margin-right: 10px;
+	flex: 1;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="name"] {
+	flex: 2;
+	padding: 8px;
+	border-radius: 5px;
+	border: 1px solid #ccc;
+	box-sizing: border-box;
+}
+
+#loginButton {
+	background-color: #007bff;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	width: 300px;
+	margin-top: 30px;
+	margin-bottom: 15px;
+	;
+}
+
+#registreerButton {
+	display: inline-block;
+	width: 300px;
+	background-color: #fff;
+	color: #000;
+	padding: 10px 20px;
+	border-radius: 5px;
+	cursor: pointer;
+	border: 2px solid #000;
+	text-decoration: none;
+}
+
+#loginButton:hover {
+	background-color: #0056b3;
+}
+
+#registreerButton:hover {
+	background-color: #ccc;
+}
+
+#message {
+	margin-top: 10px;
+	color: #ff0000;
+}
+
+
+/* //////////////////////////
+	Registreren
+////////////////////////// */
+
+@media (prefers-color-scheme: dark) {
+
+	:root {
+		--achtergrond-licht: var(--achtergrond-donker);
+		--container-licht: var(--container-donker);
+		--tekst-donker: var(--tekst-licht);
+		--accent1: orange;
+	}
+
+	.titel-flex-main div img,
+	.button-secundair img,
+	#filters img,
+	footer img,
+	header img,
+	.genre-item img {
+		filter: invert(100%);
+		/* Inverteer de kleuren (van zwart naar wit) */
+	}
+
+	.titel-flex-main svg path,
+	.titel-flex svg path {
+		stroke-width: 1.5px;
+		stroke: white;
+	}
+
+
+	.titel-flex-main .liked path,
+	.titel-flex .liked path {
+		stroke: red;
+	}
+
+}
+
+.afgebroken-naam {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	/* or any other desired behavior */
+}
+
+/* LOGO */
+
+#logo {
+	width: 75px;
+}
+
+#logo path:nth-of-type(1) {
+	fill: var(--accent1);
+}
+
+#logo path:nth-of-type(2),
+#logo path:nth-of-type(3),
+#logo path:nth-of-type(4) {
+	fill: var(--tekst-donker);
+}
+
+@keyframes huppelen {
+	0% {
+		transform: translateY(0);
+		fill: var(--accent1);
+	}
+	25% {
+		transform: translateY(-15px);
+		fill: var(--accent1);
+	}
+	50% {
+		transform: translateY(0);
+		fill: hsl(calc(180 + 180), 100%, 50%)
+	}
+	75% {
+		transform: translateY(5px);
+		fill: hsl(calc(180 + 180), 100%, 50%)
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+
+
+#logo path:nth-of-type(2) {
+	animation: huppelen 2s ease-in-out 5.2s;
+}
+
+#logo path:nth-of-type(3) {
+	animation: huppelen 2s ease-in-out 5.4s;
+}
+
+#logo path:nth-of-type(4) {
+	animation: huppelen 2s ease-in-out 5.6s;
+}
+
+#logo path {
+	transition: transform 0.5s ease-in-out;
+}
+
+#logo:hover path:nth-of-type(2) {
+	transform: translateY(-5px);
+}
+
+#logo:hover path:nth-of-type(3) {
+	transform: translateY(-10px);
+}
+
+#logo:hover path:nth-of-type(4) {
+	transform: translateY(-15px);
+}
+
+footer {
+	background-color: var(--container-licht);
+	padding-top: 1em;
+	margin-top: 2em;
+	padding-bottom: 3em;
+}
+
+footer>div {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	padding: 20px;
+	margin: auto;
+	max-width: var(--maxwidth);
+}
+
+footer>div>div {
+	flex: 1;
+	margin-right: 20px;
+	margin-bottom: 1em;
+}
+
+footer p {
+	color: var(--tekst-donker);
+}
+
+footer h3 {
+	color: var(--accent1);
+	font-size: 25px;
+	margin-bottom: 0.25em;
+}
+
+footer ul {
+	list-style-type: none;
+	padding: 0;
+}
+
+.social-icons {
+	display: flex;
+	justify-content: space-between;
+	gap: 10px;
+	width: 30%;
+}
+
+footer img {
+	width: 30px;
+}

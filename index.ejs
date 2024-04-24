@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link href="./styles/style.css" rel="stylesheet">
+    <link href="./styles/home.css" rel="stylesheet">
+</head>
+
+<body>
+
+    <%- include('partials/header') %>
+
+    <main class="home">
+        <section>
+            <h1>Ontdek nieuwe muziek</h1>
+
+            <div id="filters">
+                <div>
+                    <a id="slide" onclick="toggleFilters()"><button class="filterbutton">Filters</button></a>
+                    <a id="slide"><button id="toggle_sorteer_activeer">
+                        <svg id="toggle_sorteer" xmlns="http://www.w3.org/2000/svg" width="23.213" height="18.362">
+                            <path fill="#000000" d="m17.656 18.073 4.922-5.05a.919.919 0 0 0 .274-.644c0-.517-.352-.86-.86-.86a.795.795 0 0 0-.605.245l-2.032 2.1-1.572 1.826.088-2.256V.885c0-.508-.361-.879-.869-.879-.518 0-.879.371-.879.879v12.549l.098 2.256-1.573-1.826-2.03-2.1a.81.81 0 0 0-.606-.244c-.508 0-.87.342-.87.86a.93.93 0 0 0 .284.644l4.922 5.049c.361.38.927.39 1.308 0Z"/>
+                            <path d="M5.205.3.273 5.327c-.166.176-.273.43-.273.645 0 .517.352.87.86.87.253 0 .449-.089.615-.255l2.03-2.1 1.573-1.816-.098 2.256v12.549c0 .517.362.879.88.879.507 0 .869-.362.869-.88V4.929L6.64 2.672 8.203 4.49l2.041 2.1a.803.803 0 0 0 .606.253c.507 0 .859-.352.859-.87a.955.955 0 0 0-.274-.644L6.514.3c-.362-.38-.938-.4-1.309 0Z"/>
+                        </svg>
+                            
+                            </button></a>
+
+                </div>
+                <div>
+                    <a id="slide"><button id="toggle_grid"><img id="toggleIcon" src="./images/iconen/list.svg"
+                                alt="Grid View"></button></a>
+                </div>
+
+            </div>
+        </section>
+
+        <section id="grid1" class="list1">
+
+            <% for(var i=0; i<songs.length; i++) {%>
+            <a href="/detail?id=<%= songs[i]._id %>">
+                <div>
+                    <img class="hoofdfoto" src="./images/covers/<%= songs[i].albumId %>.png"
+                        alt="Achtergrondafbeelding">
+                    <div>
+                        <p><%= ((songs[i].likes.length/meesteLikes)*100).toFixed(0) %>%</p>
+                    </div>
+                </div>
+                <div class="genres-flex-main">
+                    <div class="titel-flex-main">
+                        <div>
+                            <h3><%= songs[i].title %></h3>
+                            <p><%= songs[i].artist %></p>
+                        </div>
+                        <div>
+                            <svg id="<%= songs[i]._id %>" onclick="likeButton('<%= songs[i]._id %>')"
+                                src="./images/iconen/hart_filled.svg" alt="Like"
+                                class="<% for(var j=0; j<likes.length; j++) { if(likes[j] == songs[i]._id){ %>liked<% }} %>"
+                                width="32px" height="32px" viewBox="0 0 24.00 24.00" fill="none"
+                                xmlns="http://www.w3.org/2000/svg" stroke="#000000"
+                                stroke-width="0.00024000000000000003">
+
+                                <path
+                                    d="M2 9.1371C2 14 6.01943 16.5914 8.96173 18.9109C10 19.7294 11 20.5 12 20.5C13 20.5 14 19.7294 15.0383 18.9109C17.9806 16.5914 22 14 22 9.1371C22 4.27416 16.4998 0.825464 12 5.50063C7.50016 0.825464 2 4.27416 2 9.1371Z"
+                                    fill="none" />
+                            </svg>
+                        </div>
+                    </div>
+                    <div class="grid-mini">
+                        <p><%= songs[i].genre %></p>
+                        <p><%= songs[i].bpm %></p>
+                        <p><%= songs[i].key %></p>
+                    </div>
+                </div>
+            </a>
+            <% } %>
+
+        </section>
+
+        <div class="popup" id="popup1">
+
+            <form id="filterForm" action="/" method="POST">
+
+                <div>
+                    <h3>Filter</h3>
+                    <a class="clear-knop" href="/"><p>Wis Filters</p></a>
+                    <input type="submit" class="submit-knop" onclick="toggleFilters()" value="Opslaan">
+                </div>
+
+                <section>
+                    <div class="popup-flex">
+                        <h4>Sorteren</h4>
+                    </div>
+                    <div class="filterSection" id="carrousel">
+
+                        <label class="slide">
+                            <input type="radio" name="sorteren" value="popular" checked><span>Populariteit</span>
+                        </label>
+
+                        <label class="slide">
+                            <input type="radio" name="sorteren" value="title"><span>Titel</span>
+                        </label>
+
+                        <label class="slide">
+                            <input type="radio" name="sorteren" value="artist"><span>Artiest</span>
+                        </label>
+
+                        <label class="slide">
+                            <input type="radio" name="sorteren" value="bpm"><span>BPM</span>
+                        </label>
+                    </div>
+                </section>
+
+                <section>
+                    <div class="popup-flex">
+                        <h4>Genre</h4>
+                        <p class="checkboxCount">0/6</p>
+                    </div>
+                    <div class="filterSection" id="carrousel">
+
+                        <label class="slide">
+                            <input type="checkbox" name="genre" value="house"
+                                onchange="updateCheckboxCount(this)"><span>House</span>
+                        </label>
+
+                        <label class="slide">
+                            <input type="checkbox" name="genre" value="pop"
+                                onchange="updateCheckboxCount(this)"><span>Pop</span>
+                        </label>
+
+                        <label class="slide">
+                            <input type="checkbox" name="genre" value="techno"
+                                onchange="updateCheckboxCount(this)"><span>Techno</span>
+                        </label>
+
+                        <label class="slide">
+                            <input type="checkbox" name="genre" value="rap"
+                                onchange="updateCheckboxCount(this)"><span>Hiphop</span>
+                        </label>
+
+                        <label class="slide">
+                            <input type="checkbox" name="genre" value="nederlands"
+                                onchange="updateCheckboxCount(this)"><span>Nederlands</span>
+                        </label>
+
+                        <label class="slide">
+                            <input type="checkbox" name="genre" value="rock"
+                                onchange="updateCheckboxCount(this)"><span>Rock</span>
+                        </label>
+                    </div>
+                </section>
+
+
+                <section>
+                    <div class="popup-flex">
+                        <h4>Tempo</h4>
+                        <p class="rangeValues">Tempo</p>
+                    </div>
+                    <div class="range-slider">
+                        <span class="rangeValues"></span>
+                        <input value="70" min="70" max="180" step="1" type="range" name="bpmMin">
+                        <input value="180" min="70" max="180" step="1" type="range" name="bpmMax">
+                    </div>
+                </section>
+
+
+                <section>
+                    <div class="popup-flex">
+                        <h4>Toonsoort</h4>
+                        <p class="checkboxCount">0/7</p>
+                    </div>
+                    <div class="filterSection" id="carrousel">
+
+                        <label class="slide">
+                            <input type="checkbox" name="key" value="a"
+                                onchange="updateCheckboxCount(this)"><span>A</span>
+                        </label>
+
+                        <label class="slide">
+                            <input type="checkbox" name="key" value="b"
+                                onchange="updateCheckboxCount(this)"><span>B</span>
+                        </label>
+
+                        <label class="slide">
+                            <input type="checkbox" name="key" value="c"
+                                onchange="updateCheckboxCount(this)"><span>C</span>
+                        </label>
+
+                        <label class="slide">
+                            <input type="checkbox" name="key" value="d"
+                                onchange="updateCheckboxCount(this)"><span>D</span>
+                        </label>
+
+                        <label class="slide">
+                            <input type="checkbox" name="key" value="e"
+                                onchange="updateCheckboxCount(this)"><span>E</span>
+                        </label>
+
+                        <label class="slide">
+                            <input type="checkbox" name="key" value="f"
+                                onchange="updateCheckboxCount(this)"><span>F</span>
+                        </label>
+
+                        <label class="slide">
+                            <input type="checkbox" name="key" value="g"
+                                onchange="updateCheckboxCount(this)"><span>G</span>
+                        </label>
+                    </div>
+                </section>
+
+            </form>
+
+        </div>
+
+    </main>
+
+    <%- include('partials/footer') %>
+
+    <script defer src="./scripts/script.js"></script>
+    <script defer src="./scripts/filters.js"></script>
+    <script defer src="./scripts/buttons.js"></script>
+
+</body>
+
+</html>
