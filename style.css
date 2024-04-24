@@ -262,6 +262,10 @@ nav a:hover {
 		display: none;
 	}
 
+	header .nav-buttons {
+		display: none;
+	}
+
     nav li {
         opacity: 0;
     }
